@@ -3,32 +3,44 @@
 import {
   Bell,
   BriefcaseBusiness,
+  Brush,
   CalendarClock,
   Camera,
   CheckCircle2,
   ChevronRight,
   ClipboardList,
   CreditCard,
+  Dumbbell,
   Eye,
   Gift,
+  GraduationCap,
+  Hammer,
   Heart,
+  HeartHandshake,
   History,
   Home,
   IdCard,
   ImagePlus,
+  KeyRound,
   LifeBuoy,
   LockKeyhole,
   MapPin,
   Megaphone,
   MessageCircle,
   PackageCheck,
+  PawPrint,
   Search,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
   Star,
+  Stethoscope,
+  Smartphone,
+  Truck,
   UserRound,
   UsersRound,
+  Utensils,
+  Wrench,
   WalletCards,
   X
 } from "lucide-react";
@@ -84,6 +96,21 @@ const serviceCategories: ServiceCategory[] = [
 ];
 
 const professionalSkills = new Set(serviceCategories.flatMap((category) => category.professional));
+
+const categoryIconMap: Record<string, React.ReactNode> = {
+  家政保洁: <Brush size={22} strokeWidth={2.4} />,
+  维修安装: <Wrench size={22} strokeWidth={2.4} />,
+  跑腿代办: <Truck size={22} strokeWidth={2.4} />,
+  陪诊护理: <Stethoscope size={22} strokeWidth={2.4} />,
+  搬家拉货: <PackageCheck size={22} strokeWidth={2.4} />,
+  学习培训: <GraduationCap size={22} strokeWidth={2.4} />,
+  生活陪伴: <HeartHandshake size={22} strokeWidth={2.4} />,
+  宠物照看: <PawPrint size={22} strokeWidth={2.4} />,
+  美容美甲: <Sparkles size={22} strokeWidth={2.4} />,
+  运动健身: <Dumbbell size={22} strokeWidth={2.4} />,
+  数码协助: <Smartphone size={22} strokeWidth={2.4} />,
+  安全开锁: <KeyRound size={22} strokeWidth={2.4} />
+};
 
 const homeBanners = [
   { eyebrow: "新人安心服务", title: "实名师傅，服务留痕", detail: "地址分段展示、订单内沟通、售后可追溯。" },
@@ -427,7 +454,9 @@ function HomeCategoryGrid({ categories, expanded, onToggle, onOpen }: { categori
       <div className="mt-4 grid grid-cols-4 gap-3">
         {categories.map((category) => (
           <button key={category.name} onClick={() => onOpen(category.name)} className="group text-center">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-mint/10 text-sm font-black text-mint group-active:scale-95">{category.name.slice(0, 2)}</div>
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-mint/10 text-mint ring-1 ring-mint/10 transition group-active:scale-95">
+              {categoryIconMap[category.name]}
+            </div>
             <p className="mt-2 text-xs font-black text-ink/75">{category.name}</p>
           </button>
         ))}
@@ -753,9 +782,14 @@ function DemandCard({ request, onDetail, onAccept }: { request: ServiceRequest; 
   return (
     <article className="rounded-2xl border border-ink/10 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="font-black leading-snug">{request.title}</h3>
-          <p className="mt-1 line-clamp-2 text-sm leading-6 text-ink/60">{request.description}</p>
+        <div className="flex min-w-0 gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-mint/10 text-mint">
+            {categoryIconMap[category.name]}
+          </div>
+          <div className="min-w-0">
+            <h3 className="font-black leading-snug">{request.title}</h3>
+            <p className="mt-1 line-clamp-2 text-sm leading-6 text-ink/60">{request.description}</p>
+          </div>
         </div>
         <StatusPill label={requiredSkill ? "资质必需" : "人人可接"} tone={requiredSkill ? "bg-coral/15 text-[#a83f3d]" : "bg-mint/15 text-[#08785c]"} />
       </div>
@@ -787,8 +821,8 @@ function ProviderCard({ provider, onOpen }: { provider: ServiceProvider; onOpen:
             <StatusPill label={provider.isAcceptingOrders ? "接单中" : "休息"} tone={provider.isAcceptingOrders ? "bg-mint/15 text-[#08785c]" : "bg-slate-200 text-slate-600"} />
           </div>
           <div className="mt-2 flex flex-wrap gap-2">
-            <Badge label="实名认证" />
-            {provider.qualificationVerified && <Badge label="资质通过" />}
+            <Badge label="实名认证" icon={<ShieldCheck size={12} />} />
+            {provider.qualificationVerified && <Badge label="资质通过" icon={<IdCard size={12} />} />}
             {provider.skills.slice(0, 2).map((skill) => <Badge key={skill} label={skill} muted />)}
           </div>
           <div className="mt-3 flex items-center justify-between text-sm">
@@ -805,7 +839,10 @@ function CategoryRail({ selected, onSelect }: { selected: string; onSelect: (cat
   return (
     <aside className="w-24 shrink-0 space-y-2">
       {serviceCategories.map((category) => (
-        <button key={category.name} onClick={() => onSelect(category.name)} className={`w-full rounded-xl px-2 py-3 text-xs font-black ${selected === category.name ? "bg-ink text-white" : "bg-white text-ink/65"}`}>{category.name}</button>
+        <button key={category.name} onClick={() => onSelect(category.name)} className={`flex w-full flex-col items-center gap-1 rounded-2xl px-2 py-3 text-xs font-black shadow-sm ${selected === category.name ? "bg-ink text-white" : "bg-white text-ink/65"}`}>
+          <span className={selected === category.name ? "text-mint" : "text-mint"}>{categoryIconMap[category.name]}</span>
+          <span>{category.name}</span>
+        </button>
       ))}
     </aside>
   );
@@ -973,8 +1010,13 @@ function StatusPill({ label, tone }: { label: string; tone: string }) {
   return <span className={`whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-black ${tone}`}>{label}</span>;
 }
 
-function Badge({ label, muted = false }: { label: string; muted?: boolean }) {
-  return <span className={`rounded-full px-2 py-1 text-xs font-black ${muted ? "bg-paper text-ink/70" : "bg-mint/10 text-mint"}`}>{label}</span>;
+function Badge({ label, muted = false, icon }: { label: string; muted?: boolean; icon?: React.ReactNode }) {
+  return (
+    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-black ${muted ? "bg-paper text-ink/70" : "bg-mint/10 text-mint"}`}>
+      {icon}
+      {label}
+    </span>
+  );
 }
 
 function IconButton({ label, children, onClick }: { label: string; children: React.ReactNode; onClick: () => void }) {
