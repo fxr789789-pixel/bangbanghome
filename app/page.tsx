@@ -430,10 +430,21 @@ function RealnameModal({ visible, step, onNext, onComplete }: { visible: boolean
 function HomeBanner({ index, onSelect }: { index: number; onSelect: (index: number) => void }) {
   const banner = homeBanners[index];
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-mint p-5 text-white shadow-soft">
+    <section className="relative overflow-hidden rounded-[28px] bg-mint p-5 text-white shadow-soft">
       <div className="absolute -right-7 -top-7 h-28 w-28 rounded-full bg-white/15" />
-      <div className="absolute bottom-3 right-5 grid h-20 w-20 place-items-center rounded-3xl bg-white/15">
-        <LogoMark />
+      <div className="absolute bottom-4 right-4 w-24 space-y-2">
+        <div className="rounded-2xl bg-white/18 p-2 backdrop-blur">
+          <div className="flex items-center gap-2">
+            <span className="grid h-7 w-7 place-items-center rounded-xl bg-white text-mint"><ShieldCheck size={15} /></span>
+            <span className="text-[10px] font-black text-white/90">实名保障</span>
+          </div>
+        </div>
+        <div className="ml-5 rounded-2xl bg-white/18 p-2 backdrop-blur">
+          <div className="flex items-center gap-2">
+            <span className="grid h-7 w-7 place-items-center rounded-xl bg-white text-mint"><Sparkles size={15} /></span>
+            <span className="text-[10px] font-black text-white/90">AI 分类</span>
+          </div>
+        </div>
       </div>
       <p className="text-xs font-black text-white/75">{banner.eyebrow}</p>
       <h2 className="mt-2 max-w-[14rem] text-2xl font-black leading-tight">{banner.title}</h2>
@@ -454,9 +465,7 @@ function HomeCategoryGrid({ categories, expanded, onToggle, onOpen }: { categori
       <div className="mt-4 grid grid-cols-4 gap-3">
         {categories.map((category) => (
           <button key={category.name} onClick={() => onOpen(category.name)} className="group text-center">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-mint/10 text-mint ring-1 ring-mint/10 transition group-active:scale-95">
-              {categoryIconMap[category.name]}
-            </div>
+            <CategoryIcon category={category.name} />
             <p className="mt-2 text-xs font-black text-ink/75">{category.name}</p>
           </button>
         ))}
@@ -528,10 +537,10 @@ function OrderCenter({ request, status, income, onAdvance, onChat, onPayment, on
           ))}
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3">
-          <button onClick={onChat} className="rounded-xl bg-paper py-3 font-black">联系对方</button>
-          <button onClick={onPayment} className="rounded-xl bg-mint py-3 font-black text-white">去支付</button>
-          <button onClick={onRefund} className="rounded-xl bg-paper py-3 font-black">退款售后</button>
-          <button onClick={onReport} className="rounded-xl bg-paper py-3 font-black">举报投诉</button>
+          <ActionButton icon={<MessageCircle size={18} />} label="联系对方" onClick={onChat} />
+          <ActionButton icon={<CreditCard size={18} />} label="去支付" onClick={onPayment} primary />
+          <ActionButton icon={<LifeBuoy size={18} />} label="退款售后" onClick={onRefund} />
+          <ActionButton icon={<ShieldCheck size={18} />} label="举报投诉" onClick={onReport} />
         </div>
         <button onClick={onAdvance} className="mt-3 w-full rounded-xl bg-ink py-3 font-black text-white">{orderStatusMeta[status].next ?? "去评价"}</button>
       </section>
@@ -784,7 +793,7 @@ function DemandCard({ request, onDetail, onAccept }: { request: ServiceRequest; 
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 gap-3">
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-mint/10 text-mint">
-            {categoryIconMap[category.name]}
+            <CategoryIcon category={category.name} compact />
           </div>
           <div className="min-w-0">
             <h3 className="font-black leading-snug">{request.title}</h3>
@@ -839,8 +848,8 @@ function CategoryRail({ selected, onSelect }: { selected: string; onSelect: (cat
   return (
     <aside className="w-24 shrink-0 space-y-2">
       {serviceCategories.map((category) => (
-        <button key={category.name} onClick={() => onSelect(category.name)} className={`flex w-full flex-col items-center gap-1 rounded-2xl px-2 py-3 text-xs font-black shadow-sm ${selected === category.name ? "bg-ink text-white" : "bg-white text-ink/65"}`}>
-          <span className={selected === category.name ? "text-mint" : "text-mint"}>{categoryIconMap[category.name]}</span>
+        <button key={category.name} onClick={() => onSelect(category.name)} className={`flex w-full flex-col items-center gap-1 rounded-2xl px-2 py-3 text-xs font-black shadow-sm ${selected === category.name ? "bg-mint text-white" : "bg-white text-ink/65"}`}>
+          <span className={selected === category.name ? "text-white" : "text-mint"}>{categoryIconMap[category.name]}</span>
           <span>{category.name}</span>
         </button>
       ))}
@@ -878,7 +887,7 @@ function BottomNav({ activeTab, setActiveTab }: { activeTab: Tab; setActiveTab: 
     <nav className="safe-bottom fixed bottom-0 left-1/2 z-30 w-full max-w-md -translate-x-1/2 border-t border-ink/10 bg-white/95 px-2 pt-2 backdrop-blur">
       <div className="grid grid-cols-5 gap-1">
         {tabs.map((tab) => (
-          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex h-14 flex-col items-center justify-center rounded-2xl text-xs font-bold ${activeTab === tab.id ? "bg-ink text-white shadow-sm" : "text-ink/60"}`}>{tab.icon}<span className="mt-1">{tab.label}</span></button>
+          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex h-14 flex-col items-center justify-center rounded-2xl text-xs font-bold ${activeTab === tab.id ? "bg-mint text-white shadow-sm" : "text-ink/60"}`}>{tab.icon}<span className="mt-1">{tab.label}</span></button>
         ))}
       </div>
     </nav>
@@ -896,18 +905,35 @@ function SearchBar({ onClick }: { onClick: () => void }) {
 
 function QuickAction({ icon, label, detail, onClick }: { icon: React.ReactNode; label: string; detail: string; onClick: () => void }) {
   return (
-    <button onClick={onClick} className="rounded-2xl border border-ink/10 bg-white p-4 text-left shadow-sm">
-      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-mint/15 text-mint">{icon}</div>
+    <button onClick={onClick} className="rounded-2xl border border-ink/10 bg-white p-4 text-left shadow-sm transition active:scale-[0.99]">
+      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-mint/15 text-mint ring-1 ring-mint/10">{icon}</div>
       <h3 className="mt-3 font-black">{label}</h3>
       <p className="text-sm text-ink/60">{detail}</p>
     </button>
   );
 }
 
+function CategoryIcon({ category, compact = false }: { category: string; compact?: boolean }) {
+  return (
+    <div className={`${compact ? "h-9 w-9 rounded-xl" : "mx-auto h-12 w-12 rounded-2xl"} grid place-items-center bg-mint/10 text-mint ring-1 ring-mint/10 transition group-active:scale-95`}>
+      {categoryIconMap[category]}
+    </div>
+  );
+}
+
+function ActionButton({ icon, label, onClick, primary = false }: { icon: React.ReactNode; label: string; onClick: () => void; primary?: boolean }) {
+  return (
+    <button onClick={onClick} className={`inline-flex items-center justify-center gap-2 rounded-xl py-3 font-black transition active:scale-[0.99] ${primary ? "bg-mint text-white" : "bg-paper text-ink"}`}>
+      {icon}
+      {label}
+    </button>
+  );
+}
+
 function MiniEntry({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick?: () => void }) {
   return (
-    <button onClick={onClick} className="rounded-2xl border border-ink/10 bg-white p-3 text-center shadow-sm">
-      <div className="mx-auto grid h-9 w-9 place-items-center rounded-2xl bg-mint/10 text-mint">{icon}</div>
+    <button onClick={onClick} className="rounded-2xl border border-ink/10 bg-white p-3 text-center shadow-sm transition active:scale-[0.99]">
+      <div className="mx-auto grid h-9 w-9 place-items-center rounded-2xl bg-mint/10 text-mint ring-1 ring-mint/10">{icon}</div>
       <p className="mt-2 text-xs font-black text-ink/75">{label}</p>
     </button>
   );
