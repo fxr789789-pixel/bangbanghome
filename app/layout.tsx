@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "帮帮",
-  description: "有事找帮帮 - C2C 本地上门服务交易平台 MVP 演示",
+  description: "有事找帮帮 - C2C 本地上门服务交易平台预生产 MVP",
   icons: {
     icon: "/app-icon.svg",
     apple: "/app-icon.svg"

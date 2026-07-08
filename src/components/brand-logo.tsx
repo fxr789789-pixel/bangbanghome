@@ -22,7 +22,7 @@ export function BrandLogo({ compact = false, inverted = false }: BrandLogoProps)
 
 export function LogoMark() {
   return (
-    <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-[15px] bg-mint shadow-soft">
+    <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-mint shadow-soft">
       <svg
         aria-hidden="true"
         className="h-11 w-11"
@@ -31,12 +31,18 @@ export function LogoMark() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <rect x="3" y="3" width="66" height="66" rx="18" fill="#13B889" />
+        <path
+          d="M20 29c4-8 11-11 16-5 5-6 12-3 16 5"
+          stroke="white"
+          strokeWidth="5"
+          strokeLinecap="round"
+        />
         <text
           x="36"
-          y="31"
+          y="42"
           fill="white"
           fontFamily="Arial, 'Microsoft YaHei', sans-serif"
-          fontSize="19"
+          fontSize="18"
           fontWeight="900"
           textAnchor="middle"
         >
@@ -44,10 +50,10 @@ export function LogoMark() {
         </text>
         <text
           x="36"
-          y="51"
+          y="54"
           fill="white"
           fontFamily="Arial, 'Microsoft YaHei', sans-serif"
-          fontSize="8.5"
+          fontSize="7"
           fontWeight="800"
           textAnchor="middle"
           letterSpacing="0"
