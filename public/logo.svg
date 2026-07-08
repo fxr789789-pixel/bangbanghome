@@ -1,0 +1,6 @@
+<svg width="512" height="160" viewBox="0 0 512 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="160" rx="32" fill="#F8FAF8"/>
+  <rect x="36" y="30" width="440" height="100" rx="28" fill="#13B889"/>
+  <text x="256" y="82" fill="white" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="44" font-weight="900" text-anchor="middle">帮帮</text>
+  <text x="256" y="113" fill="white" fill-opacity="0.92" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="800" text-anchor="middle">有事找帮帮</text>
+</svg>
