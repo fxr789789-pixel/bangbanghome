@@ -1,0 +1,27 @@
+# Sensitive fundraising artifacts
+crm.csv
+investor-email-database.csv
+investor-discovery-seeds.csv
+draft-queue-*.csv
+pending-send-queue-*.csv
+sent-record-*.csv
+send-log-*.md
+reply-analysis-*.md
+daily-report-20*.md
+weekly-report-20*.md
+hourly-discovery-send-report-*.md
+hourly-run-diagnosis-*.md
+investor-email-database-report-*.md
+drafts-20*.md
+today-first-emails-20*.md
+outbox-*/
+scheduled-task-logs/
+*.pptx
+!README.md
+!investor-criteria.md
+!outreach-policy.md
+!email-templates.md
+!daily-report-template.md
+!data-schema.csv
+!dry-run-report.md
+!SECURITY.md

@@ -15,3 +15,23 @@ yarn-error.log*
 .DS_Store
 
 .vercel
+
+# Public repo safety for fundraising workspace
+fundraising/crm.csv
+fundraising/investor-email-database.csv
+fundraising/investor-discovery-seeds.csv
+fundraising/draft-queue-*.csv
+fundraising/pending-send-queue-*.csv
+fundraising/sent-record-*.csv
+fundraising/send-log-*.md
+fundraising/reply-analysis-*.md
+fundraising/daily-report-20*.md
+fundraising/weekly-report-20*.md
+fundraising/hourly-discovery-send-report-*.md
+fundraising/hourly-run-diagnosis-*.md
+fundraising/investor-email-database-report-*.md
+fundraising/drafts-20*.md
+fundraising/today-first-emails-20*.md
+fundraising/outbox-*/
+fundraising/scheduled-task-logs/
+fundraising/*.pptx
